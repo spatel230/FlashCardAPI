@@ -20,7 +20,7 @@ public class LoginController {
     public List<User> findAllUsers(){
         return loginDAO.findAllUser();
     }
-    @GetMapping("retrieveById/{userId}")
+    @GetMapping("retrieveUserById/{userId}")
     public User findUserById(@PathVariable int userId){
         return (User) loginDAO.findById(userId);
     }

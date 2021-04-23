@@ -21,12 +21,12 @@ public class FlashCardController {
     public List<FlashCard> findAllFlashCards(){
         return flashCardDAO.findAllFlashCards();
     }
-    @GetMapping("retrieveById/{flashCardId}")
-    public FlashCard findUserById(@PathVariable int flashCardId){
+    @GetMapping("retrieveFlashCardById/{flashCardId}")
+    public FlashCard findFlashCardById(@PathVariable int flashCardId){
         return (FlashCard) flashCardDAO.findById(flashCardId);
     }
     @PostMapping("/addFlashCard")
-    public FlashCard addUser(@RequestBody FlashCard newFlashCard){
+    public FlashCard addFlashCard(@RequestBody FlashCard newFlashCard){
         newFlashCard.setId(0);
         flashCardDAO.save(newFlashCard);
         return newFlashCard;
@@ -36,8 +36,8 @@ public class FlashCardController {
         flashCardDAO.save(updatedFlashCard);
         return updatedFlashCard;
     }
-    @DeleteMapping("/deleteUser/{FlashCardId}")
-    public String deleteUser(@PathVariable int FlashCardId){
+    @DeleteMapping("/deleteFlashCard/{FlashCardId}")
+    public String deleteFlashCard(@PathVariable int FlashCardId){
         flashCardDAO.deleteFlashCardById(FlashCardId);
         return "Deleted User Id: "+FlashCardId;
     }
