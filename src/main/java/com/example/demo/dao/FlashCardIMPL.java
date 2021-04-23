@@ -19,7 +19,7 @@ public class FlashCardIMPL implements FlashCardDAO{
 
     @Override
     @Transactional
-    public List<FlashCard> findAllUser() {
+    public List<FlashCard> findAllFlashCards() {
         Session cSession=entityManager.unwrap(Session.class);
         Query<FlashCard> myQuery=cSession.createQuery("from FlashCard");
         return myQuery.getResultList();
