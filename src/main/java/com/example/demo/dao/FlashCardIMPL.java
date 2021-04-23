@@ -1,6 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.entity.User;
+import com.example.demo.entity.FlashCard;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -10,37 +10,41 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class LoginIMPL implements LoginDAO{
+public class FlashCardIMPL implements FlashCardDAO{
     private final EntityManager entityManager;
 
-    public LoginIMPL(EntityManager entityManager) {
+    public FlashCardIMPL(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
     @Transactional
-    public List<User> findAllUser() {
+    public List<FlashCard> findAllUser() {
         Session cSession=entityManager.unwrap(Session.class);
-        Query<User> myQuery=cSession.createQuery("from User");
+        Query<FlashCard> myQuery=cSession.createQuery("from FlashCard");
         return myQuery.getResultList();
     }
 
     @Override
-    public User findById(int ID) {
+    @Transactional
+    public FlashCard findById(int ID) {
         Session cSession=entityManager.unwrap(Session.class);
-        return cSession.get(User.class, ID);
+        return cSession.get(FlashCard.class, ID);
     }
 
     @Override
-    public void save(User newUser) {
+    @Transactional
+    public void save(FlashCard newFlashCard) {
         Session cSession=entityManager.unwrap(Session.class);
-        cSession.saveOrUpdate(newUser);
+        cSession.saveOrUpdate(newFlashCard);
+
     }
 
     @Override
-    public void deleteUserById(int ID) {
+    @Transactional
+    public void deleteFlashCardById(int ID) {
         Session cSession=entityManager.unwrap(Session.class);
-        User deleteUser=cSession.get(User.class, ID);
-        cSession.delete(deleteUser);
+        FlashCard deleteFlashCard=cSession.get(FlashCard.class, ID);
+        cSession.delete(deleteFlashCard);
     }
 }
