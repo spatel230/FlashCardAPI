@@ -16,13 +16,21 @@ public class LoginController {
     public LoginController(@Qualifier("loginIMPL") LoginDAO loginDAO) {
         this.loginDAO = loginDAO;
     }
-    @GetMapping("retrieveAllUsers")
+    @GetMapping("/retrieveAllUsers")
     public List<User> findAllUsers(){
         return loginDAO.findAllUser();
     }
-    @GetMapping("retrieveUserById/{userId}")
+    @GetMapping("/retrieveUserById/{userId}")
     public User findUserById(@PathVariable int userId){
         return (User) loginDAO.findById(userId);
+    }
+    @GetMapping("/ifCredentialsMatch")
+    public User ifCredentialsMatch(@RequestBody User checkUser){
+        return (User) loginDAO.ifCredentialsMatch(checkUser);
+    }
+    @GetMapping("/ifUsernameIsTaken/{Username}")
+    public User ifUsernameIsTaken(@PathVariable String Username){
+        return (User) loginDAO.ifUsernameIsTaken(Username);
     }
     @PostMapping("/addUser")
     public User addUser(@RequestBody User newUser){
