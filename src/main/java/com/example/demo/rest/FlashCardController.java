@@ -32,8 +32,13 @@ public class FlashCardController {
         return newFlashCard;
     }
     @PostMapping("/updateFlashCard")
-    public FlashCard updateUser(@RequestBody FlashCard updatedFlashCard) {
+    public FlashCard updateFlashCard(@RequestBody FlashCard updatedFlashCard) {
         flashCardDAO.save(updatedFlashCard);
         return updatedFlashCard;
+    }
+    @DeleteMapping("/deleteUser/{FlashCardId}")
+    public String deleteUser(@PathVariable int FlashCardId){
+        flashCardDAO.deleteFlashCardById(FlashCardId);
+        return "Deleted User Id: "+FlashCardId;
     }
 }
