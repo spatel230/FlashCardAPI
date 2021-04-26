@@ -28,17 +28,25 @@ public class LoginIMPL implements LoginDAO{
     @Override
     public User ifCredentialsMatch(User check) {
         Session cSession=entityManager.unwrap(Session.class);
-        String sql="from User c where c.username=\'"+check.getUsername()+"\'&& c.password=\'"+check.getPassword()+"\'";
+        String sql="from User c where (c.Username=\'"+check.getUsername()+"\'AND c.Password=\'"+check.getPassword()+"\')";
         Query<User> myQuery=cSession.createQuery(sql);
-        return myQuery.getSingleResult();
+        try {
+            return myQuery.getSingleResult();
+        }catch (Exception e){
+            return new User();
+        }
     }
 
     @Override
     public User ifUsernameIsTaken(String name) {
         Session cSession=entityManager.unwrap(Session.class);
-        String sql="from User c where c.username=\'"+name+"\'";
+        String sql="from User c where c.Username=\'"+name+"\'";
         Query<User> myQuery=cSession.createQuery(sql);
-        return myQuery.getSingleResult();
+        try {
+            return myQuery.getSingleResult();
+        }catch (Exception e){
+            return new User();
+        }
     }
 
     @Override
