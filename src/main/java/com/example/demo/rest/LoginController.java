@@ -24,7 +24,7 @@ public class LoginController {
     public User findUserById(@PathVariable int userId){
         return (User) loginDAO.findById(userId);
     }
-    @GetMapping("/ifCredentialsMatch")
+    @PostMapping("/ifCredentialsMatch")
     public User ifCredentialsMatch(@RequestBody User checkUser){
         return (User) loginDAO.ifCredentialsMatch(checkUser);
     }
